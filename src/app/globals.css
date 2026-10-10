@@ -22,3 +22,7 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--color-accent); 
     hyphens: auto;
   }
 }
+
+body {
+  overflow-x: clip;
+}

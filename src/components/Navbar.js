@@ -45,7 +45,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 shadow-xl">
-      {/* Baris info (hilang saat halaman di-scroll) */}
+      {/* Baris info (hilang saat halaman di-scroll, tidak tampil di HP) */}
       <div
         className={`hidden overflow-hidden bg-brand-dark text-xs text-white/85 transition-all duration-300 md:block ${
           scrolled ? "max-h-0" : "max-h-10"
@@ -92,20 +92,22 @@ export default function Navbar() {
 
       {/* Baris utama */}
       <div className="bg-gradient-to-r from-ink via-ink to-brand-dark text-white">
-        <nav className="mx-auto flex max-w-[1500px] items-stretch justify-between px-6 lg:px-10">
-          <Link href="/" className="flex items-center gap-3 py-2" onClick={closeAll}>
+        <nav className="mx-auto flex min-h-20 max-w-[1500px] items-stretch justify-between gap-3 px-4 sm:px-6 lg:px-10">
+          <Link href="/" className="flex min-w-0 items-center gap-2 py-2 sm:gap-3" onClick={closeAll}>
             <Image
               src="/slides/logo.jpg"
               alt="Logo sekolah"
               width={56}
               height={56}
               unoptimized
-              className={`rounded-full bg-white object-contain transition-all duration-300 ${
-                scrolled ? "h-11 w-11" : "h-14 w-14"
+              className={`shrink-0 rounded-full bg-white object-contain transition-all duration-300 ${
+                scrolled ? "h-10 w-10" : "h-11 w-11 sm:h-14 sm:w-14"
               }`}
             />
-            <span className="leading-tight">
-              <span className="block font-display text-lg font-bold md:text-xl">{school.nama}</span>
+            <span className="min-w-0 leading-tight">
+              <span className="block truncate font-display text-base font-bold sm:text-lg md:text-xl">
+                {school.nama}
+              </span>
               <span className="hidden text-xs font-semibold tracking-wide text-accent sm:block">
                 {school.tagline}
               </span>
@@ -113,7 +115,7 @@ export default function Navbar() {
           </Link>
 
           <button
-            className="my-3 rounded-lg border border-white/40 px-4 text-sm font-semibold hover:bg-white/10 md:hidden"
+            className="my-3 shrink-0 rounded-lg border border-white/40 px-4 text-sm font-semibold hover:bg-white/10 md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-expanded={mobileOpen}
             aria-label="Buka menu"
@@ -187,7 +189,7 @@ export default function Navbar() {
 
         {/* Menu HP */}
         {mobileOpen && (
-          <ul className="flex flex-col gap-1 border-t border-white/15 px-6 py-3 md:hidden">
+          <ul className="flex flex-col gap-1 border-t border-white/15 px-4 py-3 sm:px-6 md:hidden">
             {menu.map((item) => {
               const sub = item.children ? flatten(item.children) : null;
               return (
